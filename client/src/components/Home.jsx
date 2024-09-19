@@ -106,7 +106,7 @@ const Home = () => {
         <h1>{comic.title}</h1>
         <div className="comic-info">
           <p className="comic-tag">Date: {comic.year}/{comic.month}/{comic.day}</p>
-          <p className="comic-tag">View Count: {comic.viewCount || 1}</p>
+          <p className="comic-tag">View Count: {comic.viewCount ?? 1}</p>
         </div>
         <img loading="lazy" src={comic.img} alt={comic.alt} />
         <div className="transcript expanded">
