@@ -22,7 +22,7 @@ app.use((req, res, next) => {
 app.get('/api/latest', async (req, res) => {
     try {
         const response = await axios.get('https://xkcd.com/info.0.json');
-        res.json({...response.data});
+        res.json({ ...response.data });
     } catch (err) {
         res.status(500).json({ message: 'Error fetching latest comic' });
     }
@@ -32,7 +32,7 @@ app.get('/api/comic/:id', async (req, res) => {
     try {
         const comicId = req.params.id;
         const response = await axios.get(`https://xkcd.com/${comicId}/info.0.json`);
-        
+
         // Initialize view count to 0 if it doesn't exist, then increment
         if (!viewCounts[comicId]) {
             viewCounts[comicId] = 0;

@@ -19,10 +19,10 @@ const Home = () => {
         // Fetch the latest comic if not already stored
         if (!latestComicNum) {
           const latestResponse = await axios.get('/api/latest');
-          setLatestComicNum(latestResponse.data.num); 
+          setLatestComicNum(latestResponse.data.num);
           setComic(latestResponse.data);// Set latest comic number
-        }else{
-        // Fetch the specific comic
+        } else {
+          // Fetch the specific comic
           const response = await axios.get(`/api/${comicId === 'latest' ? 'latest' : `comic/${comicId}`}`);
           setComic(response.data);
         }
