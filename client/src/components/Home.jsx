@@ -14,18 +14,20 @@ const Home = () => {
   useEffect(() => {
     const fetchComic = async () => {
       const comicId = id || 'latest';
+      let firstFetchNum = null;
       try {
         setLoading(true);
         // Fetch the latest comic if not already stored
         if (!latestComicNum) {
           const latestResponse = await axios.get('/api/latest');
           setLatestComicNum(latestResponse.data.num);
-          setComic(latestResponse.data);// Set latest comic number
-        } else {
+          firstFetchNum = latestResponse.data.num
+          // setComic(latestResponse.data);// Set latest comic number
+        } 
           // Fetch the specific comic
-          const response = await axios.get(`/api/${comicId === 'latest' ? 'latest' : `comic/${comicId}`}`);
-          setComic(response.data);
-        }
+        const response = await axios.get(`/api/${`comic/${comicId === 'latest' ?  firstFetchNum : comicId}`}`);
+        setComic(response.data);
+        
         setError(false);
       } catch (err) {
         setError(err);
