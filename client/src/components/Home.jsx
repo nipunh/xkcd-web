@@ -93,7 +93,7 @@ const Home = () => {
   return <div className="comic-container">
     {
       loading ? (
-        <div className="loader"></div> // Loading spinner or placeholder
+        <div className="loader"></div>
       ) : error ? (
         <div className="error-message">
           {error.message}
