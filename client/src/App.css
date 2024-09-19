@@ -11,7 +11,6 @@ body {
 /* Comics Container */
 .comic-container {
   width: 90%;
-  max-width: 800px;
   min-width: 800px; /* Minimum width for large screens */
   min-height: 600px;
   margin: 20px auto;
@@ -26,20 +25,19 @@ body {
   align-items: center;
 }
 
-/* Heading */
 .comic-container h1 {
   font-size: 1.8rem;
   margin-bottom: 10px;
 }
 
-/* Comic Info */
+
 .comic-info {
   display: flex;
   justify-content: center;
   gap: 10px; /* Space between tags */
 }
 
-/* Comic Tags */
+
 .comic-tag {
   background-color: #e0e0e0;
   border-radius: 5px;
@@ -47,7 +45,7 @@ body {
   font-size: 0.9em;
 }
 
-/* Comic Image */
+
 .comic-container img {
   max-width: 100%;
   height: auto;
@@ -137,7 +135,7 @@ body {
   .comic-container {
     padding: 15px;
     width: 95%;
-    min-width: unset; /* Remove min-width for smaller screens */
+    min-width: unset;
     min-height: auto;
   }
 
