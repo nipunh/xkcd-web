@@ -22,7 +22,8 @@ app.use((req, res, next) => {
 app.get('/api/latest', async (req, res) => {
     try {
         const response = await axios.get('https://xkcd.com/info.0.json');
-        res.json(response.data);
+        viewCounts[comicId] = (viewCounts[comicId] || 0) + 1;
+        res.json({ ...response.data, viewCount: viewCounts[comicId] });
     } catch (err) {
         res.status(500).json({ message: 'Error fetching latest comic' });
     }
