@@ -13,19 +13,15 @@ const Home = () => {
 
   useEffect(() => {
     const fetchComic = async () => {
-      const comicId = id || 'latest';
+      console.log("other useEffet")
+      const comicId = 'latest';
       try {
         setLoading(true);
+        let API = `/api/comic/${comicId}`;
         // Fetch the latest comic if not already stored
-        if (!latestComicNum) {
-          const latestResponse = await axios.get('/api/latest');
-          setLatestComicNum(latestResponse.data.num);
-          setComic(latestResponse.data);// Set latest comic number
-        } else {
-          // Fetch the specific comic
-          const response = await axios.get(`/api/${comicId === 'latest' ? 'latest' : `comic/${comicId}`}`);
-          setComic(response.data);
-        }
+        const latestResponse = await axios.get(API);
+        setLatestComicNum(latestResponse.data.num);
+        setComic(latestResponse.data);// Set latest comic number
         setError(false);
       } catch (err) {
         setError(err);
@@ -35,7 +31,30 @@ const Home = () => {
     };
 
     fetchComic();
-  }, [id, latestComicNum]);
+  }, [])
+
+  useEffect(() => {
+    const fetchComic = async () => {
+      console.log("Id usefeect")
+      const comicId = id;
+      try {
+        setLoading(true);
+        let API = `/api/comic/${comicId}`;
+        // Fetch the specific comic
+        const response = await axios.get(API);
+        setComic(response.data);
+        setError(false);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    if(id !== null && id !== undefined){
+      fetchComic();
+    }
+    
+  }, [id]);
 
   // Navigate to the previous comic
   const handlePrevious = () => {

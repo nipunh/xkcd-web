@@ -18,31 +18,24 @@ app.use((req, res, next) => {
     next();
 });
 
-// Routes
-app.get('/api/latest', async (req, res) => {
-    try {
-        const response = await axios.get('https://xkcd.com/info.0.json');
-        res.json({ ...response.data });
-    } catch (err) {
-        res.status(500).json({ message: 'Error fetching latest comic' });
-    }
-});
-
-app.get('/api/comic/:id', async (req, res) => {
+app.get('/api/comic/:id?', async (req, res) => {
     try {
         const comicId = req.params.id;
-        const response = await axios.get(`https://xkcd.com/${comicId}/info.0.json`);
-
-        // Initialize view count to 0 if it doesn't exist, then increment
-        if (!viewCounts[comicId]) {
-            viewCounts[comicId] = 0;
+        let response = null;
+        if(comicId === 'latest' || comicId === undefined || comicId === null){
+            response = await axios.get('https://xkcd.com/info.0.json');
+        }else{
+            response = await axios.get(`https://xkcd.com/${comicId}/info.0.json`); 
         }
-        viewCounts[comicId] += 1;
-
-        // Return the comic data along with the view count
-        res.json({ ...response.data, viewCount: viewCounts[comicId] });
+        // Initialize view count to 0 if it doesn't exist, then increment
+        if (!viewCounts[response.data.num]) {
+            viewCounts[response.data.num] = 0;
+        }
+        viewCounts[response.data.num] += 1;
+        res.json({ ...response.data, viewCount: viewCounts[response.data.num] });
+        
     } catch (err) {
-        res.status(500).json({ message: 'Error fetching comic' });
+        res.status(500).json({ message: 'Error fetching comic' + err.message });
     }
 });
 
