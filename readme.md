@@ -31,3 +31,28 @@ xkcd-web/
 ├── server.js             # Express server
 ├── package.json          # Node dependencies and scripts
 └── README.md             # Project documentation
+
+## Steps to run locally
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/nipunh/xkcd-web.git
+    cd xkcd-web
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+## Running the Application Locally
+
+1. **Start the development server:**
+
+    ```bash
+    npm start
+    ```
+
+2. Open your browser and navigate to `http://localhost:8080` to see the application in action.
