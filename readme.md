@@ -1,4 +1,4 @@
-# xkcd Web Comic Viewer
+# xkcd Web Comic Viewer : https://xkcd-web-ef3c3a00da2f.herokuapp.com
 
 ## Overview
 The xkcd Web Comic Viewer is a web application that allows users to view and navigate through xkcd comic strips using the xkcd API. This project is built with React for the frontend and Node.js with Express for the backend.
@@ -31,6 +31,7 @@ xkcd-web/
 ├── server.js             # Express server
 ├── package.json          # Node dependencies and scripts
 └── README.md             # Project documentation
+```
 
 ## Steps to run locally
 
