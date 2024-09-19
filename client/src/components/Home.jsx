@@ -19,14 +19,15 @@ const Home = () => {
         // Fetch the latest comic if not already stored
         if (!latestComicNum) {
           const latestResponse = await axios.get('/api/latest');
-          setLatestComicNum(latestResponse.data.num); // Set latest comic number
-        }
+          setLatestComicNum(latestResponse.data.num); 
+          setComic(latestResponse.data);// Set latest comic number
+        }else{
         // Fetch the specific comic
-        const response = await axios.get(`/api/${comicId === 'latest' ? 'latest' : `comic/${comicId}`}`);
-        setComic(response.data);
+          const response = await axios.get(`/api/${comicId === 'latest' ? 'latest' : `comic/${comicId}`}`);
+          setComic(response.data);
+        }
         setError(false);
       } catch (err) {
-        console.error('Error fetching comic', err);
         setError(err);
       } finally {
         setLoading(false);
@@ -38,29 +39,29 @@ const Home = () => {
 
   // Navigate to the previous comic
   const handlePrevious = () => {
-    if (comic && comic.num > 1) navigate(`/comic/${comic.num - 1}`);
+    if (comic && comic.num > 1) navigate(`/${comic.num - 1}`);
   };
 
   // Navigate to the next comic
   const handleNext = () => {
-    if (comic && comic.num < latestComicNum) navigate(`/comic/${comic.num + 1}`);
+    if (comic && comic.num < latestComicNum) navigate(`/${comic.num + 1}`);
   };
 
   // Navigate to the first comic
   const handleJumpToFirst = () => {
-    navigate(`/comic/1`);
+    navigate(`/1`);
   };
 
   // Navigate to the latest comic
   const handleJumpToLast = () => {
-    navigate(`/comic/${latestComicNum}`);
+    navigate(`/${latestComicNum}`);
   };
 
   // Generate a random comic number between 1 and the latest comic number
   const handleRandomComic = () => {
     if (latestComicNum) {
       const randomComicNum = Math.floor(Math.random() * latestComicNum) + 1;
-      navigate(`/comic/${randomComicNum}`);
+      navigate(`/${randomComicNum}`);
     }
   };
 
@@ -92,7 +93,7 @@ const Home = () => {
   return <div className="comic-container">
     {
       loading ? (
-        <div className="loader"></div>
+        <div className="loader"></div> // Loading spinner or placeholder
       ) : error ? (
         <div className="error-message">
           {error.message}

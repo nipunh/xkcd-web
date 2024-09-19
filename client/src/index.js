@@ -6,8 +6,7 @@ import App from './App';
 ReactDOM.render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/comic/:id" element={<App />} />
+      <Route path="/:id?" element={<App />} />
     </Routes>
   </Router>,
   document.getElementById('root')
